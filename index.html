@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilman Ahmed - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            primary: '#000000',
+            light: '#F3F4F6',
+            accent: '#A855F7',
+            accentHover: '#9333EA',
+          },
+          borderRadius: {
+            '4xl': '32px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --fg: #ffffff;
+      --muted: #9CA3AF;
+      --accent: #A855F7;
+      --card: #F3F4F6;
+      --border: rgba(255,255,255,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    /* Custom Cursor */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #FFFFFF;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+    .cursor-outline {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease;
+    }
+
+    /* Background Grid */
+    .bg-grid {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Glow Orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Enhanced Float */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(2deg); }
+    }
+
+    /* Pulse Glow - Updated to Light White */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+    }
+
+    .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-fade-left { animation: fadeInLeft 0.8s ease-out forwards; }
+    .animate-fade-right { animation: fadeInRight 0.8s ease-out forwards; }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+    /* Premium Reveal Transitions */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(80px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Skill card hover - Enhanced */
+    .skill-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .skill-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(168, 85, 247, 0.25);
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background: white;
+      color: black;
+      padding: 16px 32px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+    }
+
+    .btn-ghost {
+      background: white;
+      color: black;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid black;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost:hover {
+      background: black;
+      color: white;
+    }
+
+    /* Button Press Effect */
+    .btn-press:active {
+      transform: scale(0.97);
+    }
+
+    /* Badge */
+    .badge {
+      background: rgba(0,0,0,0.1);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #6B7280;
+    }
+
+    .badge-dark {
+      background: rgba(255,255,255,0.1);
+      color: #9CA3AF;
+    }
+
+    /* Nav blur - Enhanced Glassmorphism */
+    .nav-blur {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.85);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu a {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      margin: 16px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .mobile-menu.active a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #10B981;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 200;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Input focus */
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      width: 28px;
+      height: 20px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 9px; }
+    .hamburger span:nth-child(3) { bottom: 0; }
+
+    .hamburger.active span:nth-child(1) {
+      top: 9px;
+      transform: rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      bottom: 9px;
+      transform: rotate(-45deg);
+    }
+
+    /* Achievement card - Enhanced Hover */
+    .achievement-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-5px) translateX(5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    /* Social icon */
+    .social-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .social-icon:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* Hide cursor on mobile */
+    @media (max-width: 768px) {
+      .cursor-dot, .cursor-outline { display: none; }
+    }
+
+    /* Focus visible */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden lg:block" id="cursor-dot"></div>
+  <div class="cursor-outline hidden lg:block" id="cursor-outline"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <!-- Updated: Logo Image -->
+        <img src="my logo.png" alt="Logo" class="h-10 w-10 rounded-lg object-cover transition-transform group-hover:scale-110">
+        <span class="font-black text-white text-lg tracking-tight hidden sm:block">GILMAN AHMED</span>
+      </a>
+      
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">HOME</a>
+        <a href="#about" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">ABOUT</a>
+        <a href="#skills" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">SKILLS</a>
+        <a href="#contact" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">CONTACT</a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+    <a href="#home" class="mobile-link" style="transition-delay: 0.1s">HOME</a>
+    <a href="#about" class="mobile-link" style="transition-delay: 0.15s">ABOUT</a>
+    <a href="#skills" class="mobile-link" style="transition-delay: 0.2s">SKILLS</a>
+    <a href="#contact" class="mobile-link" style="transition-delay: 0.25s">CONTACT</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen bg-black flex items-center pt-20 relative overflow-hidden bg-grid">
+    <!-- Glow Orbs -->
+    <div class="glow-orb w-96 h-96 bg-white/10 top-20 -left-48 animate-float"></div>
+    <div class="glow-orb w-64 h-64 bg-gray-500/20 bottom-20 right-20" style="animation: float 8s ease-in-out infinite reverse;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-16 w-full relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left - Illustration -->
+        <div class="reveal-left order-2 lg:order-1">
+          <!-- Updated: Light White Glow applied via updated CSS -->
+          <div class="rounded-4xl aspect-[4/5] lg:aspect-[3/4] animate-float animate-pulse-glow overflow-hidden bg-gray-900">
+            <img src="home_pic.jpeg" alt="Gilman Ahmed" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <!-- Right - Text -->
+        <div class="order-1 lg:order-2">
+          <p class="text-gray-400 text-lg mb-4 reveal" style="transition-delay: 0.1s">Hi, I'm a</p>
+          <h1 class="reveal" style="transition-delay: 0.2s">
+            <span class="text-accent font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter block">COMPUTER SCIENCE</span>
+            <span class="text-white font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter block">&amp; ENGINEERING STUDENT</span>
+          </h1>
+          <p class="text-gray-400 text-lg mt-6 max-w-lg leading-relaxed reveal" style="transition-delay: 0.3s">
+            Passionate about building scalable applications and exploring the intersection of technology and creativity. Constantly learning, evolving, and pushing boundaries in software development.
+          </p>
+          <div class="mt-10 reveal" style="transition-delay: 0.4s">
+            <a href="https://drive.google.com/file/d/1rihxmmw_slBIqQXRudakt36KeVIT8LH9/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-primary btn-press">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              DOWNLOAD CV
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-light py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- About Me -->
+      <div class="mb-20">
+        <div class="reveal">
+          <span class="badge">ABOUT ME</span>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 mt-8 items-center">
+          <div class="reveal-left">
+            <h2 class="text-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mb-6">
+              About <span class="text-accent">Me</span>
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-4">
+              Hi, I'm Gilman Ahmed — A Computer Science &amp; Engineering student at Leading University, Sylhet, with a genuine passion for technology and how it's reshaping the world around us.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-4">
+              I'm currently focused on building a strong foundation in computer science while exploring the fields of Cloud Computing and Machine Learning — two areas I believe will define the next generation of technology.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-4">
+              My goal is to pursue my postgraduate studies abroad after completing my B.Sc, where I can push my learning further and work alongside some of the brightest minds in the field.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              I'm not just here to get a degree — I'm here to grow, build, and eventually create something that matters. Every concept I learn, every problem I solve, brings me one step closer to that vision.
+            </p>
+          </div>
+          <div class="reveal-right">
+            <div class="rounded-4xl aspect-square overflow-hidden bg-gray-200">
+              <img src="about_pic.jpeg" alt="Gilman Ahmed" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="mb-20">
+        <div class="reveal">
+          <span class="badge">MY ACHIEVEMENTS</span>
+        </div>
+        <h3 class="text-black font-black text-2xl sm:text-3xl tracking-tighter mt-6 mb-8 reveal" style="transition-delay: 0.1s">
+          Efforts That <span class="text-accent">Paid Off</span>
+        </h3>
+        
+        <div class="space-y-4">
+          <!-- Achievement 1 -->
+          <div class="achievement-card bg-white rounded-2xl p-6 flex items-center gap-6 reveal" style="transition-delay: 0.2s">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl flex-shrink-0 overflow-hidden bg-gray-100">
+              <img src="ict.png" alt="Trophy" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="text-black font-bold text-lg sm:text-xl">1st Place — ICT Programming Contest</h4>
+              <p class="text-gray-500 mt-1">Scholarshome majortilla college - 2024</p>
+            </div>
+          </div>
+
+          <!-- Achievement 2 -->
+          <div class="achievement-card bg-white rounded-2xl p-6 flex items-center gap-6 reveal" style="transition-delay: 0.3s">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl flex-shrink-0 overflow-hidden bg-gray-100">
+              <img src="speech.png" alt="Medal" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="text-black font-bold text-lg sm:text-xl">1st Place — English Speech Competition</h4>
+              <p class="text-gray-500 mt-1">Scholarshome majortilla college - 2024</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Travel Section (Moved Here) -->
+      <div class="mb-20">
+        <div class="text-center mb-12">
+          <div class="reveal">
+            <span class="badge">TRAVEL</span>
+          </div>
+          <h2 class="text-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal" style="transition-delay: 0.1s">
+            WHEN I'M NOT WORKING, <br> I'M <span class="text-accent">TRAVELING</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.2s">
+            <img src="travel1.jpeg" alt="Travel 1" class="w-full h-full object-cover">
+          </div>
+          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.25s">
+            <img src="travel2.jpeg" alt="Travel 2" class="w-full h-full object-cover">
+          </div>
+          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.3s">
+            <img src="travel3.jpeg" alt="Travel 3" class="w-full h-full object-cover">
+          </div>
+          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.35s">
+            <img src="travel4.jpeg" alt="Travel 4" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="bg-black py-24 relative overflow-hidden bg-grid">
+    <div class="glow-orb w-80 h-80 bg-white/5 top-0 right-0"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <div class="reveal">
+          <span class="badge badge-dark">EXPERTISE</span>
+        </div>
+        <h2 class="text-white font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal" style="transition-delay: 0.1s">
+          MY <span class="text-accent">SKILLS</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Python -->
+        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.2s">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img src="python.png" alt="Python" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">LANGUAGE</span>
+              <h3 class="text-black font-bold text-xl mt-1">Python</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- C Basic -->
+        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.25s">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img src="C_Logo.png" alt="C Language" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">LANGUAGE</span>
+              <h3 class="text-black font-bold text-xl mt-1">C (Basic)</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- HTML -->
+        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.3s">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img src="html.png" alt="HTML" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">LANGUAGE</span>
+              <h3 class="text-black font-bold text-xl mt-1">HTML</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- CMS -->
+        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.35s">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img src="wp.png" alt="WordPress" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">CMS</span>
+              <h3 class="text-black font-bold text-xl mt-1">WordPress</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- VCS -->
+        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.4s">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img src="git_logo.png" alt="Git" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">VCS</span>
+              <h3 class="text-black font-bold text-xl mt-1">Git / GitHub</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design -->
+        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.45s">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img src="canva.png" alt="Canva" class="w-8 h-8 object-contain">
+            </div>
+            <div>
+              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">DESIGN</span>
+              <h3 class="text-black font-bold text-xl mt-1">Canva</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-light py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <div class="reveal">
+          <span class="badge">CONTACT ME</span>
+        </div>
+        <h2 class="text-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal" style="transition-delay: 0.1s">
+          I'd Love to <span class="text-accent">Hear <br> From You</span>
+        </h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Left - Contact Info -->
+        <div class="space-y-6 reveal-left">
+          <!-- Email Card -->
+          <div class="bg-white rounded-4xl p-8">
+            <h3 class="text-black font-bold text-xl mb-4">EMAIL ME</h3>
+            <a href="mailto:gilmanahmed.dev@gmail.com" class="text-accent font-semibold hover:underline break-all">
+              gilmanahmed.dev@gmail.com
+            </a>
+          </div>
+
+          <!-- Social Card -->
+          <div class="bg-white rounded-4xl p-8">
+            <h3 class="text-black font-bold text-xl mb-4">FIND ME</h3>
+            <div class="flex gap-4 flex-wrap">
+              <a href="https://www.instagram.com/gilman_nn?igsh=ZGVjaXJuYjVmMzQx" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E4405F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/qr/YODDRMCARHXJO1" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/share/1FMb3WZh8A/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/gilman-ahmed/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A66C2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right - Contact Form -->
+        <div class="reveal-right">
+          <!-- Updated: Added action and method attributes for Formsubmit -->
+          <form action="https://formsubmit.co/ajax/gilmanahmed.dev@gmail.com" method="POST" id="contactForm" class="bg-white rounded-4xl p-8 space-y-6">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="firstName" class="text-gray-600 font-semibold text-sm block mb-2">First Name</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  name="firstName" 
+                  required
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300"
+                  placeholder="John"
+                >
+              </div>
+              <div>
+                <label for="lastName" class="text-gray-600 font-semibold text-sm block mb-2">Last Name</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  name="lastName" 
+                  required
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300"
+                  placeholder="Doe"
+                >
+              </div>
+            </div>
+            <div>
+              <label for="email" class="text-gray-600 font-semibold text-sm block mb-2">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300"
+                placeholder="john@example.com"
+              >
+            </div>
+            <div>
+              <label for="message" class="text-gray-600 font-semibold text-sm block mb-2">What do you wanna say?</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                required
+                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300 resize-none"
+                placeholder="Your message here..."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-ghost btn-press w-full sm:w-auto">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <!-- Updated: Logo Image -->
+        <img src="my logo.png" alt="Logo" class="h-10 w-10 rounded-lg object-cover">
+      </div>
+      <p class="text-gray-500 text-sm">
+        &copy; 2024 Gilman Ahmed. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="alert" aria-live="polite">
+    Message sent successfully!
+  </div>
+
+  <script>
+    // Initialize variables first
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    const toast = document.getElementById('toast');
+    const contactForm = document.getElementById('contactForm');
+
+    // --- Custom Cursor Logic ---
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorOutline = document.getElementById('cursor-outline');
+
+    if (cursorDot && cursorOutline) {
+      let mouseX = 0, mouseY = 0;
+      let outlineX = 0, outlineY = 0;
+      
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX - 4 + 'px';
+        cursorDot.style.top = mouseY - 4 + 'px';
+      });
+      
+      function animateOutline() {
+        outlineX += (mouseX - outlineX) * 0.15;
+        outlineY += (mouseY - outlineY) * 0.15;
+        cursorOutline.style.left = outlineX - 20 + 'px';
+        cursorOutline.style.top = outlineY - 20 + 'px';
+        requestAnimationFrame(animateOutline);
+      }
+      animateOutline();
+      
+      // Magnetic hover effect for interactive elements
+      const hoverElements = document.querySelectorAll('a, button, .skill-card, .achievement-card, .social-icon');
+      hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorDot.style.transform = 'scale(0.5)';
+          cursorOutline.style.transform = 'scale(1.5)';
+          cursorOutline.style.borderColor = 'rgba(168, 85, 247, 0.8)';
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorDot.style.transform = 'scale(1)';
+          cursorOutline.style.transform = 'scale(1)';
+          cursorOutline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+        });
+      });
+    }
+
+    // Scroll handling for navbar
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function updateNavbar() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-blur');
+      } else {
+        navbar.classList.remove('nav-blur');
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    });
+
+    // Mobile menu toggle
+    hamburger.addEventListener('click', function() {
+      const isActive = hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive);
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    });
+
+    // Close mobile menu on link click
+    mobileLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Close mobile menu on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger-children').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    // Contact form handling (UPDATED FOR FUNCTIONALITY)
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(contactForm);
+
+      // Send data using Fetch API to Formsubmit
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if(data.success === "true" || data.success) {
+              // Show toast
+              toast.classList.add('active');
+              
+              // Reset form
+              contactForm.reset();
+        
+              // Hide toast after 3 seconds
+              setTimeout(function() {
+                toast.classList.remove('active');
+              }, 3000);
+          } else {
+              console.error('Error:', data);
+              alert('Failed to send message. Please try again.');
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('Something went wrong. Please try again later.');
+      });
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // Trigger initial animations
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.querySelectorAll('#home .reveal, #home .reveal-left, #home .reveal-right').forEach(function(el) {
+          el.classList.add('active');
+        });
+      }, 100);
+    });
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+        el.classList.add('active');
+        el.style.transition = 'none';
+      });
+    }
+  </script>
+</body>
+</html>
