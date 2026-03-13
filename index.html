@@ -3,397 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gilman Ahmed - Portfolio</title>
+  <meta name="description" content="Gilman Ahmed — Computer Science & Engineering student, developer, and creative thinker. Explore my portfolio.">
+  <title>Gilman Ahmed — Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            jakarta: ['Plus Jakarta Sans', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
           colors: {
-            primary: '#000000',
-            light: '#F3F4F6',
-            accent: '#A855F7',
-            accentHover: '#9333EA',
+            primary: '#0a0a0f',
+            surface: { DEFAULT: '#12121a', light: '#1a1a28', lighter: '#24243a' },
+            accent: { DEFAULT: '#8b5cf6', light: '#a78bfa', dark: '#7c3aed', glow: 'rgba(139,92,246,0.35)' },
+            cyan: { DEFAULT: '#06b6d4', glow: 'rgba(6,182,212,0.25)' },
           },
-          borderRadius: {
-            '4xl': '32px',
-          }
+          borderRadius: { '4xl': '2rem', '5xl': '2.5rem' },
         }
       }
     }
   </script>
   <style>
-    :root {
-      --bg: #000000;
-      --fg: #ffffff;
-      --muted: #9CA3AF;
-      --accent: #A855F7;
-      --card: #F3F4F6;
-      --border: rgba(255,255,255,0.1);
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;overflow-x:hidden}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#0a0a0f}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8b5cf6,#06b6d4);border-radius:3px}
 
-    html {
-      scroll-behavior: smooth;
-      /* Prevent horizontal scroll */
-      overflow-x: hidden;
-    }
+    /* Cursor */
+    .cursor-dot{width:6px;height:6px;background:#fff;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform .15s,background .2s}
+    .cursor-outline{width:36px;height:36px;border:1.5px solid rgba(139,92,246,.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all .18s ease-out}
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      overflow-x: hidden;
-    }
+    /* Grid bg */
+    .bg-grid{background-image:
+      linear-gradient(rgba(139,92,246,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(139,92,246,.04) 1px,transparent 1px);
+      background-size:64px 64px}
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1a1a1a;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 4px;
-    }
+    /* Gradient orbs */
+    .glow-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.25;pointer-events:none}
 
-    /* Custom Cursor */
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #FFFFFF;
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s ease;
-    }
-    .cursor-outline {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.15s ease;
-    }
-
-    /* Background Grid */
-    .bg-grid {
-      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-
-    /* Glow Orbs */
-    .glow-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      pointer-events: none;
-    }
+    /* Noise texture overlay */
+    .noise::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.5;pointer-events:none;z-index:0}
 
     /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeLeft{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes fadeRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(1.5deg)}}
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+    @keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(139,92,246,.4)}70%{box-shadow:0 0 0 15px rgba(139,92,246,0)}100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}}
+    @keyframes gradient-move{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes typing-cursor{0%,100%{opacity:1}50%{opacity:0}}
 
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    .animate-float{animation:float 6s ease-in-out infinite}
+    .animate-shimmer{background:linear-gradient(90deg,transparent,rgba(139,92,246,.08),transparent);background-size:200% 100%;animation:shimmer 3s linear infinite}
 
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(50px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+    .reveal.active{opacity:1;transform:translateY(0)}
+    .reveal-left{opacity:0;transform:translateX(-60px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+    .reveal-left.active{opacity:1;transform:translateX(0)}
+    .reveal-right{opacity:0;transform:translateX(60px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+    .reveal-right.active{opacity:1;transform:translateX(0)}
 
-    /* Enhanced Float */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(2deg); }
-    }
+    /* Glass card */
+    .glass{background:rgba(255,255,255,.03);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.06)}
+    .glass-light{background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.06)}
 
-    /* Pulse Glow */
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
-      50% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
-    }
+    /* Skill card */
+    .skill-card{transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+    .skill-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,92,246,.08),transparent);opacity:0;transition:opacity .4s}
+    .skill-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(139,92,246,.15)}
+    .skill-card:hover::before{opacity:1}
 
-    .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
-    .animate-fade-left { animation: fadeInLeft 0.8s ease-out forwards; }
-    .animate-fade-right { animation: fadeInRight 0.8s ease-out forwards; }
-    .animate-float { animation: float 6s ease-in-out infinite; }
-    .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+    /* Buttons */
+    .btn-primary{background:linear-gradient(135deg,#8b5cf6,#06b6d4);color:#fff;padding:14px 32px;border-radius:9999px;font-weight:700;font-size:14px;letter-spacing:.04em;transition:all .3s;display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden}
+    .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#06b6d4,#8b5cf6);opacity:0;transition:opacity .3s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(139,92,246,.35)}
+    .btn-primary:hover::before{opacity:1}
+    .btn-primary>*{position:relative;z-index:1}
+    .btn-primary:active{transform:scale(.97)}
 
-    /* Premium Reveal Transitions */
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .btn-ghost{background:transparent;color:#fff;padding:14px 28px;border-radius:9999px;font-weight:600;font-size:14px;border:2px solid rgba(139,92,246,.5);transition:all .3s}
+    .btn-ghost:hover{background:rgba(139,92,246,.1);border-color:#8b5cf6;color:#a78bfa}
+    .btn-ghost:active{transform:scale(.97)}
 
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-80px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-left.active {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(80px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-right.active {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* Skill card hover */
-    .skill-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .skill-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 50px -12px rgba(168, 85, 247, 0.25);
-    }
-
-    /* Button styles */
-    .btn-primary {
-      background: white;
-      color: black;
-      padding: 16px 32px;
-      border-radius: 9999px;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-primary:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(255,255,255,0.2);
-    }
-
-    .btn-ghost {
-      background: white;
-      color: black;
-      padding: 14px 28px;
-      border-radius: 9999px;
-      font-weight: 600;
-      font-size: 14px;
-      border: 2px solid black;
-      transition: all 0.3s ease;
-    }
-    .btn-ghost:hover {
-      background: black;
-      color: white;
-    }
-
-    /* Button Press Effect */
-    .btn-press:active {
-      transform: scale(0.97);
-    }
+    .btn-submit{background:linear-gradient(135deg,#8b5cf6,#06b6d4);color:#fff;padding:14px 32px;border-radius:9999px;font-weight:700;font-size:14px;border:none;transition:all .3s;cursor:pointer}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(139,92,246,.35)}
+    .btn-submit:active{transform:scale(.97)}
 
     /* Badge */
-    .badge {
-      background: rgba(0,0,0,0.1);
-      padding: 8px 16px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: #6B7280;
-    }
+    .badge{background:rgba(139,92,246,.1);padding:8px 18px;border-radius:9999px;font-size:11px;font-weight:700;letter-spacing:.15em;color:#a78bfa;border:1px solid rgba(139,92,246,.2);text-transform:uppercase}
 
-    .badge-dark {
-      background: rgba(255,255,255,0.1);
-      color: #9CA3AF;
-    }
-
-    /* Nav blur */
-    .nav-blur {
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(0,0,0,0.85);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    }
+    /* Nav */
+    .nav-blur{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(10,10,15,.85);border-bottom:1px solid rgba(255,255,255,.05)}
 
     /* Mobile menu */
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 90;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s ease;
-    }
-
-    .mobile-menu.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .mobile-menu a {
-      font-size: 32px;
-      font-weight: 800;
-      color: white;
-      margin: 16px 0;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
-    }
-
-    .mobile-menu.active a {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .mobile-menu{position:fixed;inset:0;background:rgba(10,10,15,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:90;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:all .4s ease}
+    .mobile-menu.active{opacity:1;visibility:visible}
+    .mobile-menu a{font-size:28px;font-weight:800;color:#fff;margin:14px 0;opacity:0;transform:translateY(20px);transition:all .4s ease;letter-spacing:-.02em}
+    .mobile-menu.active a{opacity:1;transform:translateY(0)}
+    .mobile-menu a:hover{color:#a78bfa}
 
     /* Toast */
-    .toast {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      background: #10B981;
-      color: white;
-      padding: 16px 24px;
-      border-radius: 12px;
-      font-weight: 600;
-      z-index: 200;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.4s ease;
-    }
+    .toast{position:fixed;bottom:32px;right:32px;background:linear-gradient(135deg,#8b5cf6,#06b6d4);color:#fff;padding:16px 24px;border-radius:16px;font-weight:600;z-index:200;transform:translateY(100px);opacity:0;transition:all .4s ease;box-shadow:0 10px 30px rgba(139,92,246,.3)}
+    .toast.active{transform:translateY(0);opacity:1}
 
-    .toast.active {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    /* Input */
+    input:focus,textarea:focus{outline:none;border-color:#8b5cf6 !important;box-shadow:0 0 0 3px rgba(139,92,246,.15)}
 
-    /* Input focus */
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent) !important;
-      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
-    }
-
-    /* HAMBURGER - FIXED */
-    .hamburger {
-      width: 32px; /* Slightly wider container */
-      height: 24px;
-      position: relative;
-      cursor: pointer;
-      z-index: 110;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 100%; /* Full width of container */
-      height: 2px;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-      transform-origin: center; /* Rotate from center */
-    }
-
-    /* Active state (X shape) */
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(11px) rotate(45deg); /* Move down and rotate */
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-11px) rotate(-45deg); /* Move up and rotate */
-    }
+    /* Hamburger */
+    .hamburger{width:28px;height:22px;position:relative;cursor:pointer;z-index:110;display:flex;flex-direction:column;justify-content:space-between}
+    .hamburger span{display:block;width:100%;height:2px;background:#fff;border-radius:2px;transition:all .3s ease;transform-origin:center}
+    .hamburger.active span:nth-child(1){transform:translateY(10px) rotate(45deg)}
+    .hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .hamburger.active span:nth-child(3){transform:translateY(-10px) rotate(-45deg)}
 
     /* Achievement card */
-    .achievement-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .achievement-card:hover {
-      transform: translateY(-5px) translateX(5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
+    .achievement-card{transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+    .achievement-card::after{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,#8b5cf6,#06b6d4);border-radius:0 4px 4px 0;opacity:0;transition:opacity .3s}
+    .achievement-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.12)}
+    .achievement-card:hover::after{opacity:1}
 
     /* Social icon */
-    .social-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+    .social-icon{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+    .social-icon:hover{transform:translateY(-3px) scale(1.05);background:rgba(139,92,246,.15);border-color:rgba(139,92,246,.3);box-shadow:0 8px 20px rgba(139,92,246,.2)}
 
-    .social-icon:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
+    /* Typing cursor */
+    .typing-cursor{display:inline-block;width:3px;height:1em;background:#8b5cf6;margin-left:4px;animation:typing-cursor 1s step-end infinite;vertical-align:text-bottom}
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-    
-    /* Hide cursor on mobile */
-    @media (max-width: 768px) {
-      .cursor-dot, .cursor-outline { display: none; }
-    }
+    /* Gradient text */
+    .gradient-text{background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-    /* Focus visible */
-    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
+    /* Animated gradient border */
+    .gradient-border{position:relative}
+    .gradient-border::before{content:'';position:absolute;inset:-1px;background:linear-gradient(135deg,#8b5cf6,#06b6d4,#8b5cf6);border-radius:inherit;z-index:-1;background-size:200% 200%;animation:gradient-move 4s ease infinite}
+
+    /* Section divider */
+    .section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.3),transparent)}
+
+    /* Photo frame */
+    .photo-frame{position:relative}
+    .photo-frame::before{content:'';position:absolute;inset:-3px;background:linear-gradient(135deg,#8b5cf6,#06b6d4,#8b5cf6);border-radius:inherit;z-index:-1;background-size:200% 200%;animation:gradient-move 4s ease infinite}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
+    @media(max-width:768px){.cursor-dot,.cursor-outline{display:none}}
+
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #8b5cf6;outline-offset:2px}
   </style>
 </head>
 <body>
@@ -403,380 +164,297 @@
 
   <!-- Navigation -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group">
-        <img src="my logo.png" alt="Logo" class="h-10 w-10 rounded-lg object-cover transition-transform group-hover:scale-110">
-        <span class="font-black text-white text-lg tracking-tight hidden sm:block">GILMAN AHMED</span>
+        <div class="relative">
+          <img src="my logo.png" alt="Logo" class="h-10 w-10 rounded-xl object-cover transition-transform group-hover:scale-110 relative z-10">
+          <div class="absolute inset-0 bg-accent/30 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        </div>
+        <span class="font-extrabold text-white text-lg tracking-tight hidden sm:block font-display">GILMAN AHMED</span>
       </a>
-      
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#home" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">HOME</a>
-        <a href="#about" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">ABOUT</a>
-        <a href="#skills" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">SKILLS</a>
-        <a href="#contact" class="text-white font-bold text-sm tracking-wider hover:text-accent transition-colors">CONTACT</a>
+      <div class="hidden md:flex items-center gap-1">
+        <a href="#home" class="text-gray-300 font-semibold text-sm tracking-wide hover:text-white px-4 py-2 rounded-full hover:bg-white/5 transition-all">HOME</a>
+        <a href="#about" class="text-gray-300 font-semibold text-sm tracking-wide hover:text-white px-4 py-2 rounded-full hover:bg-white/5 transition-all">ABOUT</a>
+        <a href="#skills" class="text-gray-300 font-semibold text-sm tracking-wide hover:text-white px-4 py-2 rounded-full hover:bg-white/5 transition-all">SKILLS</a>
+        <a href="#contact" class="btn-primary ml-4 py-2 px-6 text-xs"><span>CONTACT ME</span></a>
       </div>
-
-      <!-- Mobile Hamburger -->
       <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
-    <!-- Separate Close Button Removed - Hamburger acts as X -->
-    
-    <a href="#home" class="mobile-link" style="transition-delay: 0.1s">HOME</a>
-    <a href="#about" class="mobile-link" style="transition-delay: 0.15s">ABOUT</a>
-    <a href="#skills" class="mobile-link" style="transition-delay: 0.2s">SKILLS</a>
-    <a href="#contact" class="mobile-link" style="transition-delay: 0.25s">CONTACT</a>
+    <a href="#home" class="mobile-link" style="transition-delay:.1s">HOME</a>
+    <a href="#about" class="mobile-link" style="transition-delay:.15s">ABOUT</a>
+    <a href="#skills" class="mobile-link" style="transition-delay:.2s">SKILLS</a>
+    <a href="#contact" class="mobile-link" style="transition-delay:.25s">CONTACT</a>
   </div>
 
   <!-- Hero Section -->
-  <section id="home" class="min-h-screen bg-black flex items-center pt-20 relative overflow-hidden bg-grid">
-    <!-- Glow Orbs -->
-    <div class="glow-orb w-96 h-96 bg-white/10 top-20 -left-48 animate-float"></div>
-    <div class="glow-orb w-64 h-64 bg-gray-500/20 bottom-20 right-20" style="animation: float 8s ease-in-out infinite reverse;"></div>
+  <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden bg-grid noise">
+    <div class="glow-orb w-[500px] h-[500px] bg-accent/20 -top-20 -left-40 animate-float"></div>
+    <div class="glow-orb w-[400px] h-[400px] bg-cyan/15 bottom-0 right-0" style="animation:float 8s ease-in-out infinite reverse"></div>
+    <div class="glow-orb w-[300px] h-[300px] bg-accent/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
 
     <div class="max-w-7xl mx-auto px-6 py-16 w-full relative z-10">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <!-- Left - Illustration -->
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Left - Photo -->
         <div class="reveal-left order-2 lg:order-1">
-          <div class="rounded-4xl aspect-[4/5] lg:aspect-[3/4] animate-float animate-pulse-glow overflow-hidden bg-gray-900">
-            <img src="home_pic.jpeg" alt="Gilman Ahmed" class="w-full h-full object-cover">
+          <div class="photo-frame rounded-[2rem] overflow-hidden aspect-[4/5] lg:aspect-[3/4]">
+            <div class="rounded-[2rem] overflow-hidden h-full">
+              <img src="home_pic.jpeg" alt="Gilman Ahmed" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+            </div>
           </div>
         </div>
 
         <!-- Right - Text -->
-        <div class="order-1 lg:order-2">
-          <p class="text-gray-400 text-lg mb-4 reveal" style="transition-delay: 0.1s">Hi, I'm a</p>
-          <h1 class="reveal" style="transition-delay: 0.2s">
-            <span class="text-accent font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter block">COMPUTER SCIENCE</span>
-            <span class="text-white font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter block">&amp; ENGINEERING STUDENT</span>
+        <div class="order-1 lg:order-2 space-y-6">
+
+          <div class="reveal" style="transition-delay:.2s">
+            <p class="text-gray-400 text-lg">Hi, I'm a</p>
+          </div>
+          <h1 class="reveal" style="transition-delay:.3s">
+            <span class="gradient-text font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter block font-display">COMPUTER SCIENCE</span>
+            <span class="text-white font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter block font-display">&amp; ENGINEERING<span class="typing-cursor"></span></span>
+            <span class="text-gray-400 font-bold text-2xl sm:text-3xl md:text-4xl tracking-tight block mt-2">STUDENT</span>
           </h1>
-          <p class="text-gray-400 text-lg mt-6 max-w-lg leading-relaxed reveal" style="transition-delay: 0.3s">
+          <p class="text-gray-400 text-base sm:text-lg max-w-lg leading-relaxed reveal" style="transition-delay:.4s">
             Passionate about building scalable applications and exploring the intersection of technology and creativity. Constantly learning, evolving, and pushing boundaries in software development.
           </p>
-          <div class="mt-10 reveal" style="transition-delay: 0.4s">
-            <a href="https://drive.google.com/file/d/1rihxmmw_slBIqQXRudakt36KeVIT8LH9/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-primary btn-press">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              DOWNLOAD CV
+          <div class="flex flex-wrap gap-4 reveal" style="transition-delay:.5s">
+            <a href="https://drive.google.com/file/d/1rihxmmw_slBIqQXRudakt36KeVIT8LH9/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <span class="flex items-center gap-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                DOWNLOAD CV
+              </span>
             </a>
+            <a href="#contact" class="btn-ghost">LET'S TALK</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- About Section -->
-  <section id="about" class="bg-light py-24">
-    <div class="max-w-7xl mx-auto px-6">
+  <section id="about" class="py-24 relative overflow-hidden noise">
+    <div class="glow-orb w-[350px] h-[350px] bg-cyan/10 top-20 right-0"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
       <!-- About Me -->
-      <div class="mb-20">
-        <div class="reveal">
-          <span class="badge">ABOUT ME</span>
-        </div>
-        <div class="grid lg:grid-cols-2 gap-12 mt-8 items-center">
+      <div class="mb-24">
+        <div class="reveal"><span class="badge">ABOUT ME</span></div>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 mt-10 items-center">
           <div class="reveal-left">
-            <h2 class="text-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mb-6">
-              About <span class="text-accent">Me</span>
+            <h2 class="font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mb-8 font-display">
+              Get to Know <span class="gradient-text">Me Better</span>
             </h2>
-            <p class="text-gray-600 text-lg leading-relaxed mb-4">
-              Hi, I'm Gilman Ahmed — A Computer Science &amp; Engineering student at Leading University, Sylhet, with a genuine passion for technology and how it's reshaping the world around us.
-            </p>
-            <p class="text-gray-600 text-lg leading-relaxed mb-4">
-              I'm currently focused on building a strong foundation in computer science while exploring the fields of Cloud Computing and Machine Learning — two areas I believe will define the next generation of technology.
-            </p>
-            <p class="text-gray-600 text-lg leading-relaxed mb-4">
-              My goal is to pursue my postgraduate studies abroad after completing my B.Sc, where I can push my learning further and work alongside some of the brightest minds in the field.
-            </p>
-            <p class="text-gray-600 text-lg leading-relaxed">
-              I'm not just here to get a degree — I'm here to grow, build, and eventually create something that matters. Every concept I learn, every problem I solve, brings me one step closer to that vision.
-            </p>
+            <div class="space-y-4">
+              <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                Hi, I'm Gilman Ahmed — A Computer Science &amp; Engineering student at Leading University, Sylhet, with a genuine passion for technology and how it's reshaping the world around us.
+              </p>
+              <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                I'm currently focused on building a strong foundation in computer science while exploring the fields of Cloud Computing and Machine Learning — two areas I believe will define the next generation of technology.
+              </p>
+              <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                My goal is to pursue my postgraduate studies abroad after completing my B.Sc, where I can push my learning further and work alongside some of the brightest minds in the field.
+              </p>
+              <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                I'm not just here to get a degree — I'm here to grow, build, and eventually create something that matters. Every concept I learn, every problem I solve, brings me one step closer to that vision.
+              </p>
+            </div>
           </div>
           <div class="reveal-right">
-            <div class="rounded-4xl aspect-square overflow-hidden bg-gray-200">
-              <img src="about_pic.jpeg" alt="Gilman Ahmed" class="w-full h-full object-cover">
+            <div class="photo-frame rounded-[2rem] overflow-hidden aspect-square">
+              <div class="rounded-[2rem] overflow-hidden h-full">
+                <img src="about_pic.jpeg" alt="Gilman Ahmed" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <div class="section-divider mb-24"></div>
+
       <!-- Achievements -->
-      <div class="mb-20">
-        <div class="reveal">
-          <span class="badge">MY ACHIEVEMENTS</span>
-        </div>
-        <h3 class="text-black font-black text-2xl sm:text-3xl tracking-tighter mt-6 mb-8 reveal" style="transition-delay: 0.1s">
-          Efforts That <span class="text-accent">Paid Off</span>
+      <div class="mb-24">
+        <div class="reveal"><span class="badge">MILESTONES</span></div>
+        <h3 class="font-black text-2xl sm:text-3xl lg:text-4xl tracking-tighter mt-6 mb-10 reveal font-display" style="transition-delay:.1s">
+          Efforts That <span class="gradient-text">Paid Off</span>
         </h3>
-        
-        <div class="space-y-4">
-          <!-- Achievement 1 -->
-          <div class="achievement-card bg-white rounded-2xl p-6 flex items-center gap-6 reveal" style="transition-delay: 0.2s">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl flex-shrink-0 overflow-hidden bg-gray-100">
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="achievement-card glass rounded-2xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 reveal" style="transition-delay:.2s">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex-shrink-0 overflow-hidden bg-surface-light">
               <img src="ict.png" alt="Trophy" class="w-full h-full object-cover">
             </div>
             <div>
-              <h4 class="text-black font-bold text-lg sm:text-xl">1st Place — ICT Programming Contest</h4>
-              <p class="text-gray-500 mt-1">Scholarshome majortilla college - 2024</p>
+              <h4 class="text-white font-bold text-base sm:text-lg">1st Place — ICT Programming Contest</h4>
+              <p class="text-gray-500 mt-1 text-sm">Scholarshome majortilla college - 2024</p>
             </div>
           </div>
-
-          <!-- Achievement 2 -->
-          <div class="achievement-card bg-white rounded-2xl p-6 flex items-center gap-6 reveal" style="transition-delay: 0.3s">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl flex-shrink-0 overflow-hidden bg-gray-100">
+          <div class="achievement-card glass rounded-2xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 reveal" style="transition-delay:.3s">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex-shrink-0 overflow-hidden bg-surface-light">
               <img src="speech.png" alt="Medal" class="w-full h-full object-cover">
             </div>
             <div>
-              <h4 class="text-black font-bold text-lg sm:text-xl">1st Place — English Speech Competition</h4>
-              <p class="text-gray-500 mt-1">Scholarshome majortilla college - 2024</p>
+              <h4 class="text-white font-bold text-base sm:text-lg">1st Place — English Speech Competition</h4>
+              <p class="text-gray-500 mt-1 text-sm">Scholarshome majortilla college - 2024</p>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="section-divider mb-24"></div>
 
       <!-- Travel Section -->
-      <div class="mb-20">
+      <div>
         <div class="text-center mb-12">
-          <div class="reveal">
-            <span class="badge">TRAVEL</span>
-          </div>
-          <h2 class="text-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal" style="transition-delay: 0.1s">
-            WHEN I'M NOT WORKING, <br> I'M <span class="text-accent">TRAVELING</span>
+          <div class="reveal"><span class="badge">TRAVEL</span></div>
+          <h2 class="font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal font-display" style="transition-delay:.1s">
+            WHEN I'M NOT WORKING, <br> I'M <span class="gradient-text">TRAVELING</span>
           </h2>
         </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.2s">
-            <img src="travel1.jpeg" alt="Travel 1" class="w-full h-full object-cover">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
+          <div class="rounded-[2rem] aspect-[3/4] overflow-hidden reveal group" style="transition-delay:.2s">
+            <img src="travel1.jpeg" alt="Travel 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
-          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.25s">
-            <img src="travel2.jpeg" alt="Travel 2" class="w-full h-full object-cover">
+          <div class="rounded-[2rem] aspect-[3/4] overflow-hidden reveal group" style="transition-delay:.25s">
+            <img src="travel2.jpeg" alt="Travel 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
-          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.3s">
-            <img src="travel3.jpeg" alt="Travel 3" class="w-full h-full object-cover">
+          <div class="rounded-[2rem] aspect-[3/4] overflow-hidden reveal group" style="transition-delay:.3s">
+            <img src="travel3.jpeg" alt="Travel 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
-          <div class="rounded-4xl aspect-[3/4] overflow-hidden reveal" style="transition-delay: 0.35s">
-            <img src="travel4.jpeg" alt="Travel 4" class="w-full h-full object-cover">
+          <div class="rounded-[2rem] aspect-[3/4] overflow-hidden reveal group" style="transition-delay:.35s">
+            <img src="travel4.jpeg" alt="Travel 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
         </div>
       </div>
-
     </div>
   </section>
+
+  <div class="section-divider"></div>
 
   <!-- Skills Section -->
-  <section id="skills" class="bg-black py-24 relative overflow-hidden bg-grid">
-    <div class="glow-orb w-80 h-80 bg-white/5 top-0 right-0"></div>
-    
+  <section id="skills" class="py-24 relative overflow-hidden bg-grid noise">
+    <div class="glow-orb w-[400px] h-[400px] bg-accent/10 top-0 right-0"></div>
+    <div class="glow-orb w-[300px] h-[300px] bg-cyan/10 bottom-0 left-0"></div>
     <div class="max-w-7xl mx-auto px-6 relative z-10">
       <div class="text-center mb-16">
-        <div class="reveal">
-          <span class="badge badge-dark">EXPERTISE</span>
-        </div>
-        <h2 class="text-white font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal" style="transition-delay: 0.1s">
-          MY <span class="text-accent">SKILLS</span>
+        <div class="reveal"><span class="badge">EXPERTISE</span></div>
+        <h2 class="font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal font-display" style="transition-delay:.1s">
+          MY <span class="gradient-text">SKILLS</span>
         </h2>
+        <p class="text-gray-500 mt-4 max-w-md mx-auto reveal" style="transition-delay:.15s">Technologies and tools I work with to bring ideas to life.</p>
       </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-        <!-- Python -->
-        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.2s">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="python.png" alt="Python" class="w-8 h-8 object-contain">
-            </div>
-            <div>
-              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">LANGUAGE</span>
-              <h3 class="text-black font-bold text-xl mt-1">Python</h3>
-            </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="skill-card glass rounded-2xl p-7 reveal" style="transition-delay:.2s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-surface-lighter rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"><img src="python.png" alt="Python" class="w-8 h-8 object-contain"></div>
+            <div><span class="text-gray-500 text-xs font-bold tracking-widest uppercase">LANGUAGE</span><h3 class="text-white font-bold text-lg mt-0.5">Python</h3></div>
           </div>
         </div>
-
-        <!-- C Basic -->
-        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.25s">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="C_Logo.png" alt="C Language" class="w-8 h-8 object-contain">
-            </div>
-            <div>
-              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">LANGUAGE</span>
-              <h3 class="text-black font-bold text-xl mt-1">C (Basic)</h3>
-            </div>
+        <div class="skill-card glass rounded-2xl p-7 reveal" style="transition-delay:.25s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-surface-lighter rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"><img src="C_Logo.png" alt="C Language" class="w-8 h-8 object-contain"></div>
+            <div><span class="text-gray-500 text-xs font-bold tracking-widest uppercase">LANGUAGE</span><h3 class="text-white font-bold text-lg mt-0.5">C (Basic)</h3></div>
           </div>
         </div>
-
-        <!-- HTML -->
-        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.3s">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="html.png" alt="HTML" class="w-8 h-8 object-contain">
-            </div>
-            <div>
-              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">LANGUAGE</span>
-              <h3 class="text-black font-bold text-xl mt-1">HTML</h3>
-            </div>
+        <div class="skill-card glass rounded-2xl p-7 reveal" style="transition-delay:.3s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-surface-lighter rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"><img src="html.png" alt="HTML" class="w-8 h-8 object-contain"></div>
+            <div><span class="text-gray-500 text-xs font-bold tracking-widest uppercase">LANGUAGE</span><h3 class="text-white font-bold text-lg mt-0.5">HTML</h3></div>
           </div>
         </div>
-
-        <!-- CMS -->
-        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.35s">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="wp.png" alt="WordPress" class="w-8 h-8 object-contain">
-            </div>
-            <div>
-              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">CMS</span>
-              <h3 class="text-black font-bold text-xl mt-1">WordPress</h3>
-            </div>
+        <div class="skill-card glass rounded-2xl p-7 reveal" style="transition-delay:.35s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-surface-lighter rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"><img src="wp.png" alt="WordPress" class="w-8 h-8 object-contain"></div>
+            <div><span class="text-gray-500 text-xs font-bold tracking-widest uppercase">CMS</span><h3 class="text-white font-bold text-lg mt-0.5">WordPress</h3></div>
           </div>
         </div>
-
-        <!-- VCS -->
-        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.4s">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="git_logo.png" alt="Git" class="w-8 h-8 object-contain">
-            </div>
-            <div>
-              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">VCS</span>
-              <h3 class="text-black font-bold text-xl mt-1">Git / GitHub</h3>
-            </div>
+        <div class="skill-card glass rounded-2xl p-7 reveal" style="transition-delay:.4s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-surface-lighter rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"><img src="git_logo.png" alt="Git" class="w-8 h-8 object-contain"></div>
+            <div><span class="text-gray-500 text-xs font-bold tracking-widest uppercase">VCS</span><h3 class="text-white font-bold text-lg mt-0.5">Git / GitHub</h3></div>
           </div>
         </div>
-
-        <!-- Design -->
-        <div class="skill-card bg-white rounded-4xl p-8 reveal" style="transition-delay: 0.45s">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="canva.png" alt="Canva" class="w-8 h-8 object-contain">
-            </div>
-            <div>
-              <span class="text-gray-400 text-xs font-bold tracking-widest uppercase">DESIGN</span>
-              <h3 class="text-black font-bold text-xl mt-1">Canva</h3>
-            </div>
+        <div class="skill-card glass rounded-2xl p-7 reveal" style="transition-delay:.45s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-surface-lighter rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden"><img src="canva.png" alt="Canva" class="w-8 h-8 object-contain"></div>
+            <div><span class="text-gray-500 text-xs font-bold tracking-widest uppercase">DESIGN</span><h3 class="text-white font-bold text-lg mt-0.5">Canva</h3></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- Contact Section -->
-  <section id="contact" class="bg-light py-24">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <div class="reveal">
-          <span class="badge">CONTACT ME</span>
-        </div>
-        <h2 class="text-black font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal" style="transition-delay: 0.1s">
-          I'd Love to <span class="text-accent">Hear <br> From You</span>
+  <section id="contact" class="py-24 relative overflow-hidden noise">
+    <div class="glow-orb w-[350px] h-[350px] bg-accent/10 bottom-0 left-0"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-14">
+        <div class="reveal"><span class="badge">CONTACT</span></div>
+        <h2 class="font-black text-3xl sm:text-4xl lg:text-5xl tracking-tighter mt-6 reveal font-display" style="transition-delay:.1s">
+          Let's <span class="gradient-text">Connect<br>Together</span>
         </h2>
+        <p class="text-gray-500 mt-4 max-w-md mx-auto reveal" style="transition-delay:.15s">Got something to say or just want to say hi? I'd love to hear from you!</p>
       </div>
-
-      <div class="grid lg:grid-cols-2 gap-12">
-        <!-- Left - Contact Info -->
+      <div class="grid lg:grid-cols-2 gap-10">
+        <!-- Left - Info -->
         <div class="space-y-6 reveal-left">
-          <!-- Email Card -->
-          <div class="bg-white rounded-4xl p-8">
-            <h3 class="text-black font-bold text-xl mb-4">EMAIL ME</h3>
-            <a href="mailto:gilmanahmed.dev@gmail.com" class="text-accent font-semibold hover:underline break-all">
-              gilmanahmed.dev@gmail.com
-            </a>
+          <div class="glass rounded-2xl p-8">
+            <h3 class="text-white font-bold text-lg mb-3 flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              EMAIL ME
+            </h3>
+            <a href="mailto:gilmanahmed.dev@gmail.com" class="text-accent-light font-semibold hover:underline break-all">gilmanahmed.dev@gmail.com</a>
           </div>
-
-          <!-- Social Card -->
-          <div class="bg-white rounded-4xl p-8">
-            <h3 class="text-black font-bold text-xl mb-4">FIND ME</h3>
-            <div class="flex gap-4 flex-wrap">
+          <div class="glass rounded-2xl p-8">
+            <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              FIND ME ONLINE
+            </h3>
+            <div class="flex gap-3 flex-wrap">
               <a href="https://www.instagram.com/gilman_nn?igsh=ZGVjaXJuYjVmMzQx" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E4405F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E4405F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
               <a href="https://wa.me/qr/YODDRMCARHXJO1" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
               </a>
               <a href="https://www.facebook.com/share/1FMb3WZh8A/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                </svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
               <a href="https://www.linkedin.com/in/gilman-ahmed/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A66C2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                  <rect x="2" y="9" width="4" height="12"/>
-                  <circle cx="4" cy="4" r="2"/>
-                </svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A66C2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
             </div>
           </div>
         </div>
-
-        <!-- Right - Contact Form -->
+        <!-- Right - Form -->
         <div class="reveal-right">
-          <form action="https://formsubmit.co/ajax/gilmanahmed.dev@gmail.com" method="POST" id="contactForm" class="bg-white rounded-4xl p-8 space-y-6">
+          <form action="https://formsubmit.co/ajax/gilmanahmed.dev@gmail.com" method="POST" id="contactForm" class="glass rounded-2xl p-8 space-y-5">
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label for="firstName" class="text-gray-600 font-semibold text-sm block mb-2">First Name</label>
-                <input 
-                  type="text" 
-                  id="firstName" 
-                  name="firstName" 
-                  required
-                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300"
-                  placeholder="John"
-                >
+                <label for="firstName" class="text-gray-400 font-semibold text-sm block mb-2">First Name</label>
+                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 rounded-xl bg-surface-light border border-white/10 text-white placeholder-gray-600 transition-all duration-300" placeholder="John">
               </div>
               <div>
-                <label for="lastName" class="text-gray-600 font-semibold text-sm block mb-2">Last Name</label>
-                <input 
-                  type="text" 
-                  id="lastName" 
-                  name="lastName" 
-                  required
-                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300"
-                  placeholder="Doe"
-                >
+                <label for="lastName" class="text-gray-400 font-semibold text-sm block mb-2">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 rounded-xl bg-surface-light border border-white/10 text-white placeholder-gray-600 transition-all duration-300" placeholder="Doe">
               </div>
             </div>
             <div>
-              <label for="email" class="text-gray-600 font-semibold text-sm block mb-2">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                required
-                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300"
-                placeholder="john@example.com"
-              >
+              <label for="email" class="text-gray-400 font-semibold text-sm block mb-2">Email</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-surface-light border border-white/10 text-white placeholder-gray-600 transition-all duration-300" placeholder="john@example.com">
             </div>
             <div>
-              <label for="message" class="text-gray-600 font-semibold text-sm block mb-2">What do you wanna say?</label>
-              <textarea 
-                id="message" 
-                name="message" 
-                rows="4" 
-                required
-                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-black placeholder-gray-400 transition-all duration-300 resize-none"
-                placeholder="Your message here..."
-              ></textarea>
+              <label for="message" class="text-gray-400 font-semibold text-sm block mb-2">What do you wanna say?</label>
+              <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-surface-light border border-white/10 text-white placeholder-gray-600 transition-all duration-300 resize-none" placeholder="Your message here..."></textarea>
             </div>
-            <button type="submit" class="btn-ghost btn-press w-full sm:w-auto">
-              Send Message
-            </button>
+            <button type="submit" class="btn-submit w-full sm:w-auto">Send Message →</button>
           </form>
         </div>
       </div>
@@ -784,21 +462,21 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black py-12 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <img src="my logo.png" alt="Logo" class="h-10 w-10 rounded-lg object-cover">
+  <footer class="py-10 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img src="my logo.png" alt="Logo" class="h-8 w-8 rounded-lg object-cover">
+          <span class="font-bold text-sm text-gray-400 font-display">GILMAN AHMED</span>
+        </div>
+        <p class="text-gray-600 text-sm">&copy; 2026 Gilman Ahmed. All rights reserved.</p>
       </div>
-      <p class="text-gray-500 text-sm">
-        &copy; 2024 Gilman Ahmed. All rights reserved.
-      </p>
     </div>
   </footer>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast" role="alert" aria-live="polite">
-    Message sent successfully!
-  </div>
+  <!-- Toast -->
+  <div id="toast" class="toast" role="alert" aria-live="polite">✓ Message sent successfully!</div>
+
 
   <script>
     // Initialize variables first
@@ -839,12 +517,12 @@
         el.addEventListener('mouseenter', () => {
           cursorDot.style.transform = 'scale(0.5)';
           cursorOutline.style.transform = 'scale(1.5)';
-          cursorOutline.style.borderColor = 'rgba(168, 85, 247, 0.8)';
+          cursorOutline.style.borderColor = 'rgba(139, 92, 246, 0.8)';
         });
         el.addEventListener('mouseleave', () => {
           cursorDot.style.transform = 'scale(1)';
           cursorOutline.style.transform = 'scale(1)';
-          cursorOutline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+          cursorOutline.style.borderColor = 'rgba(139, 92, 246, 0.5)';
         });
       });
     }
