@@ -251,9 +251,9 @@
       position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98);
       backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
       z-index: 90; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      opacity: 0; visibility: hidden; transition: all 0.5s ease;
+      opacity: 0; pointer-events: none; transition: all 0.5s ease;
     }
-    .mobile-menu.active { opacity: 1; visibility: visible; }
+    .mobile-menu.active { opacity: 1; pointer-events: auto; }
     .mobile-menu a {
       font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500;
       color: #E5D0A8; margin: 16px 0; opacity: 0; transform: translateY(20px);
@@ -310,13 +310,13 @@
         </div>
         <span class="font-display font-semibold text-offwhite text-xl tracking-wide hidden sm:block">GILMAN AHMED</span>
       </a>
-      <div class="hidden md:flex items-center gap-2">
+      <div class="hidden lg:flex items-center gap-2">
         <a href="#home" class="text-offwhite/70 font-medium text-sm tracking-widest uppercase hover:text-gold-light px-4 py-2 transition-colors">Home</a>
         <a href="#about" class="text-offwhite/70 font-medium text-sm tracking-widest uppercase hover:text-gold-light px-4 py-2 transition-colors">About</a>
         <a href="#skills" class="text-offwhite/70 font-medium text-sm tracking-widest uppercase hover:text-gold-light px-4 py-2 transition-colors">Skills</a>
         <a href="#contact" class="btn-gold ml-6 py-2.5 px-6 text-xs uppercase tracking-widest">Contact Me</a>
       </div>
-      <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <button class="hamburger lg:hidden" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -340,7 +340,7 @@
             <span class="badge mb-4">Welcome</span>
           </div>
           <h1 class="reveal" style="transition-delay:.3s">
-            <span class="font-display text-offwhite/70 text-2xl italic block mb-0 font-normal relative z-10 translate-y-2">I am</span>
+            <span class="font-display text-offwhite/70 text-2xl italic block mb-0 font-normal relative z-10 translate-y-1">I am</span>
             <span class="text-gold-gradient font-display font-bold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] block">Computer Science</span>
             <span class="font-display font-medium text-offwhite text-4xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-2">&amp; Engineering Student</span>
           </h1>
