@@ -37,8 +37,8 @@
   </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #F5F0E8; overflow-x: hidden; }
+    html { scroll-behavior: smooth; overflow-x: hidden; width: 100vw; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #F5F0E8; overflow-x: hidden; width: 100vw; position: relative; }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0a0a0a; }
@@ -248,7 +248,7 @@
 
     /* Mobile menu */
     .mobile-menu {
-      position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98);
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 10, 10, 0.98);
       backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
       z-index: 90; display: flex; flex-direction: column; justify-content: center; align-items: center;
       opacity: 0; pointer-events: none; transition: all 0.5s ease;
@@ -288,20 +288,19 @@
     <div class="absolute w-[180vw] h-[180vw] sm:w-[180vw] sm:h-[180vh] border-[1px] border-gold-brass/10 rounded-[45%] animate-spin-slow-reverse top-1/2 left-1/2" style="animation-duration: 60s;"></div>
     <div class="absolute w-[100vw] h-[100vw] sm:w-[100vw] sm:h-[100vh] border-[1px] border-gold-light/5 rounded-[35%] animate-spin-slow top-1/2 left-1/2" style="animation-duration: 50s;"></div>
     <div class="absolute w-[200vw] h-[200vw] sm:w-[200vw] sm:h-[200vh] border-[1px] border-gold-dark/5 rounded-[48%] animate-spin-slow-reverse top-1/2 left-1/2" style="animation-duration: 80s;"></div>
+    
+    <div class="gold-orb w-[600px] h-[600px] bg-gold-dark/20 top-[-100px] left-[-200px] anim-float1"></div>
+    <div class="gold-orb w-[500px] h-[500px] bg-gold-DEFAULT/10 bottom-[-100px] right-[-100px] anim-float2" style="animation-delay: -5s"></div>
+    <div class="gold-orb w-[400px] h-[400px] bg-gold-brass/15 top-[40%] right-[10%] anim-float1" style="animation-delay: -2s"></div>
+    <div class="gold-orb w-[400px] h-[400px] bg-gold-light/10 bottom-[20%] left-[5%] anim-float2" style="animation-delay: -7s"></div>
   </div>
-
-  
-  <div class="gold-orb w-[600px] h-[600px] bg-gold-dark/20 top-[-100px] left-[-200px] anim-float1"></div>
-  <div class="gold-orb w-[500px] h-[500px] bg-gold-DEFAULT/10 bottom-[-100px] right-[-100px] anim-float2" style="animation-delay: -5s"></div>
-  <div class="gold-orb w-[400px] h-[400px] bg-gold-brass/15 top-[40%] right-[10%] anim-float1" style="animation-delay: -2s"></div>
-  <div class="gold-orb w-[400px] h-[400px] bg-gold-light/10 bottom-[20%] left-[5%] anim-float2" style="animation-delay: -7s"></div>
 
   <!-- Custom Cursor -->
   <div class="cursor-dot hidden lg:block" id="cursor-dot"></div>
   <div class="cursor-outline hidden lg:block" id="cursor-outline"></div>
 
   <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-500 py-4">
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 py-4">
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group">
         <div class="relative">
